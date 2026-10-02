@@ -49,7 +49,7 @@ di-upload ke server akan hilang. Jadi database dan gambar disimpan di layanan te
    DB_DATABASE=portfolio_dhimas
    DB_USERNAME=<username TiDB>
    DB_PASSWORD=<password TiDB>
-   MYSQL_ATTR_SSL_CA="D:\xampp\apache\bin\curl-ca-bundle.crt"
+   MYSQL_ATTR_SSL_CA=D:/xampp/apache/bin/curl-ca-bundle.crt
 
    ADMIN_PASSWORD=<password admin untuk situs online — buat yang kuat>
    ```
