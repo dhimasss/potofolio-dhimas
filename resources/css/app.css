@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+/*
+ | Varian "dark:" aktif bila <html> punya class "dark" (diatur tombol tema),
+ | bukan otomatis dari pengaturan sistem.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ | Design tokens — dipakai bersama oleh sisi publik & admin.
+ | Contoh pemakaian: font-display, bg-paper, text-ink, bg-accent, text-muted, border-line
+ */
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Fraunces', ui-serif, Georgia, serif;
+
+    --color-paper: #faf8f5;       /* latar halaman, hangat seperti kertas */
+    --color-surface: #ffffff;     /* latar section/kartu yang sedikit menonjol */
+    --color-ink: #1c1917;         /* judul & teks utama */
+    --color-body: #44403c;        /* paragraf panjang */
+    --color-muted: #57534e;       /* teks pendukung */
+    --color-subtle: #78716c;      /* label & keterangan kecil */
+    --color-line: #e7e5e4;        /* garis pemisah */
+    --color-line-strong: #d6d3d1; /* garis tombol/badge */
+    --color-chip: #f5f5f4;        /* latar placeholder & badge */
+    --color-footer: #1c1917;      /* footer selalu gelap */
+
+    --color-accent: #b4532a;      /* terracotta: warna "cerita" */
+    --color-accent-dark: #8f3f1e;
+    --color-accent-soft: #f5e6dd;
+}
+
+/*
+ | Mode gelap: cukup mengganti nilai token. Semua utility (bg-paper, text-muted, ...)
+ | otomatis ikut berubah karena Tailwind v4 membaca warna lewat CSS variable.
+ */
+.dark {
+    color-scheme: dark;
+
+    --color-paper: #141210;
+    --color-surface: #1c1a17;
+    --color-ink: #f3eee8;
+    --color-body: #d6d0c8;
+    --color-muted: #b0a89f;
+    --color-subtle: #8f877e;
+    --color-line: #2c2824;
+    --color-line-strong: #403a35;
+    --color-chip: #24211d;
+    --color-footer: #0b0a09;
+
+    --color-accent: #e07a4c;
+    --color-accent-dark: #ec9168;
+    --color-accent-soft: #3a2318;
+}
+
+/* Scroll reveal (lihat resources/js/app.js). Tanpa JS, konten tetap tampil normal. */
+.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
