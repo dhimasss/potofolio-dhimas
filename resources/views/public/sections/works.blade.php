@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
         <div class="flex flex-wrap items-end justify-between gap-6" data-reveal>
             <div>
-                <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">02 — Selected Works</p>
+                <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">{{ $label }} — Selected Works</p>
                 <h2 class="mt-4 font-display text-4xl font-semibold leading-tight sm:text-5xl">
                     Masalah nyata, solusi nyata.
                 </h2>

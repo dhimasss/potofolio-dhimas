@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\Project;
 use Illuminate\View\View;
 
 class PortfolioController extends Controller
 {
     /**
-     * GET / — beranda: Hero, My Journey, Selected Works, Contact.
+     * GET / — beranda: Hero, About Me, My Journey, Selected Works, Contact.
      */
     public function index(): View
     {
         return view('public.home', [
+            'profile' => Profile::current(), // null -> section About disembunyikan
             'projects' => Project::latest()->get(),
         ]);
     }

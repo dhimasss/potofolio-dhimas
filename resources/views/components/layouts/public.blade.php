@@ -2,11 +2,13 @@
 
 @php
     $home = route('home');
-    $links = [
+    // $hasAbout dikirim oleh View::composer di AppServiceProvider.
+    $links = array_values(array_filter([
+        ($hasAbout ?? false) ? ['label' => 'About', 'href' => $home.'#about'] : null,
         ['label' => 'Journey', 'href' => $home.'#journey'],
         ['label' => 'Works', 'href' => $home.'#works'],
         ['label' => 'Contact', 'href' => '#contact'],
-    ];
+    ]));
 @endphp
 
 <x-layouts.base :title="$title" :description="$description ?? config('portfolio.role').' — '.config('portfolio.name')" :image="$image"
@@ -28,13 +30,13 @@
 
     {{-- Navigasi --}}
     <header class="sticky top-0 z-40 border-b border-line/70 bg-paper/85 backdrop-blur transition-colors duration-300">
-        <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+        <nav class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:gap-4 sm:px-6">
             <a href="{{ $home }}" class="font-display text-xl font-semibold tracking-tight">
                 {{ config('portfolio.short_name') }}<span class="text-accent">.</span>
             </a>
 
-            <div class="flex items-center gap-3 sm:gap-8">
-                <ul class="flex items-center gap-4 text-sm sm:gap-8">
+            <div class="flex items-center gap-2.5 sm:gap-8">
+                <ul class="flex items-center gap-3 text-[0.8125rem] sm:gap-8 sm:text-sm">
                     @foreach ($links as $link)
                         <li>
                             <a href="{{ $link['href'] }}" class="text-muted transition hover:text-ink">{{ $link['label'] }}</a>

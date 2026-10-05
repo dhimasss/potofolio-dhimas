@@ -4,6 +4,7 @@
     $nav = [
         ['label' => 'Dashboard', 'route' => 'admin.dashboard', 'active' => 'admin.dashboard'],
         ['label' => 'Projects', 'route' => 'admin.projects.index', 'active' => 'admin.projects.*'],
+        ['label' => 'About', 'route' => 'admin.about.show', 'active' => 'admin.about.*'],
     ];
 @endphp
 

@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\UsesMediaDisk;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Project extends Model
 {
+    use UsesMediaDisk;
+
     /**
      * Kolom yang boleh diisi lewat mass assignment (Project::create($data)).
      * `slug` sengaja tidak dimasukkan karena dibuat otomatis dari `title`.
@@ -54,11 +56,7 @@ class Project extends Model
             }
         });
 
-        static::deleted(function (Project $project) {
-            if ($project->cover_image) {
-                Storage::disk(static::mediaDisk())->delete($project->cover_image);
-            }
-        });
+        static::deleted(fn (Project $project) => static::deleteMedia($project->cover_image));
     }
 
     /**
@@ -81,20 +79,12 @@ class Project extends Model
     }
 
     /**
-     * Disk penyimpanan cover: "public" di lokal, "s3" (R2) di Vercel. Diatur via MEDIA_DISK.
-     */
-    public static function mediaDisk(): string
-    {
-        return config('filesystems.media');
-    }
-
-    /**
      * Accessor: $project->cover_image_url -> URL publik gambar (atau null).
      */
     protected function coverImageUrl(): Attribute
     {
         return Attribute::get(
-            fn () => $this->cover_image ? Storage::disk(static::mediaDisk())->url($this->cover_image) : null
+            fn () => static::mediaUrl($this->cover_image)
         );
     }
 }

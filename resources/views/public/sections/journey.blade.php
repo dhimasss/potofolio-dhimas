@@ -13,7 +13,7 @@
 <section id="journey" class="scroll-mt-20 border-t border-line">
     <div class="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 sm:py-32 lg:grid-cols-12">
         <div class="lg:col-span-4" data-reveal>
-            <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">01 — My Journey</p>
+            <p class="text-sm font-medium uppercase tracking-[0.2em] text-accent">{{ $label }} — My Journey</p>
             <h2 class="mt-4 font-display text-4xl font-semibold leading-tight sm:text-5xl">
                 Di antara <em class="font-normal text-accent">rasa</em> dan logika.
             </h2>

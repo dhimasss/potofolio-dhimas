@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -44,6 +45,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // index, create, store, edit, update, destroy -> admin.projects.*
         // "show" tidak dipakai: admin bisa melihat hasilnya lewat halaman publik.
         Route::resource('projects', ProjectController::class)->except('show');
+
+        // Singleton: hanya ada satu biodata, jadi URL tanpa {id} -> /admin/about, /admin/about/edit, ...
+        Route::singleton('about', AboutController::class)->creatable()->destroyable();
 
         Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
     });

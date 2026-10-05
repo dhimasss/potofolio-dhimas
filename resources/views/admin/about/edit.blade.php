@@ -1,0 +1,10 @@
+<x-layouts.admin title="Edit Biodata">
+    <a href="{{ route('admin.about.show') }}" class="text-sm text-stone-500 hover:text-ink">← About</a>
+    <h1 class="mb-8 mt-1 font-display text-3xl font-semibold">Edit biodata</h1>
+
+    <form method="POST" action="{{ route('admin.about.update') }}" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        @include('admin.about._form')
+    </form>
+</x-layouts.admin>
